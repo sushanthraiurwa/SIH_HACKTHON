@@ -11,10 +11,16 @@ export default function AdminDashboard() {
   const [status, setStatus] = useState("");
 
   const handleSendAlert = async () => {
-    setStatus("Sending...");
+  setStatus("Sending...");
+  try {
+    console.log("Calling triggerCustomAlert with:", disaster, message);
     await triggerCustomAlert(disaster, message);
     setStatus("Alert sent!");
-  };
+  } catch (err) {
+    setStatus("Failed to send alert.");
+    console.error("Send Alert error:", err);
+  }
+};
 
   return (
     <div style={{ maxWidth: "400px", margin: "100px auto", padding: "32px", borderRadius: "16px", boxShadow: "0 4px 24px rgba(0,0,0,0.10)", background: "#fff" }}>

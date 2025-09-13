@@ -64,17 +64,21 @@ export const subscribeUser = async () => {
 // --- Trigger custom alert from admin ---
 export const triggerCustomAlert = async (disaster, message) => {
   try {
+    console.log("triggerCustomAlert called", disaster, message);
     const response = await fetch("https://sih-hackthon-935y.onrender.com/trigger-alert", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ disaster, message })
     });
+    console.log("Fetch completed, response:", response);
     if (response.ok) {
       console.log("Alert sent to backend successfully!");
     } else {
       console.error("Failed to send alert:", response.status);
+      throw new Error("Failed to send alert: " + response.status);
     }
   } catch (err) {
     console.error("Error sending alert:", err);
+    throw err;
   }
 };
