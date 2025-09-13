@@ -18,7 +18,7 @@ export const subscribeUser = async () => {
   try {
     const token = await getToken(messaging, { vapidKey: "BNa_VUjSsW3WuQzqJ0qxtKMJ1UGiqaF0byQQhoV1BodSehxg2dM2zlSvlLSB3AtSbgSymibhutQ0b0jK25LNLeo" });
     if (token) {
-      await fetch("http://localhost:5000/register-token", {
+      await fetch("https://sih-hackthon-935y.onrender.com/register-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token })
@@ -32,7 +32,7 @@ export const subscribeUser = async () => {
 };
 
 export const triggerCustomAlert = async (disaster, message) => {
-  await fetch("http://localhost:5000/trigger-alert", {
+  await fetch("https://sih-hackthon-935y.onrender.com/trigger-alert", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ disaster, message })
