@@ -70,15 +70,22 @@ export const triggerCustomAlert = async (disaster, message) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ disaster, message })
     });
-    console.log("Fetch completed, response:", response);
     if (response.ok) {
-      console.log("Alert sent to backend successfully!");
+      const data = await response.json();
+      console.log("Alert sent to backend successfully!", data);
+      if (data.success === 0) {
+        alert("No notifications sent! Check device tokens or FCM settings.");
+      }
+      return data;
     } else {
-      console.error("Failed to send alert:", response.status);
-      throw new Error("Failed to send alert: " + response.status);
+      const errData = await response.json();
+      console.error("Failed to send alert:", response.status, errData);
+      alert("Failed to send alert: " + (errData.message || response.status));
+      throw new Error("Failed to send alert: " + (errData.message || response.status));
     }
   } catch (err) {
     console.error("Error sending alert:", err);
+    alert("Error sending alert: " + err.message);
     throw err;
   }
 };
