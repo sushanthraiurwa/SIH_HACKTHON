@@ -21,7 +21,7 @@ export const messaging = getMessaging(app);
 export const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
     try {
-      const reg = await navigator.serviceWorker.register("/sw.js");
+      const reg = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
       console.log("Service Worker registered for FCM:", reg);
     } catch (err) {
       console.error("Service Worker registration failed:", err);
