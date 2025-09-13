@@ -39,7 +39,7 @@ export const subscribeUser = async () => {
     });
     console.log("Generated FCM token:", token);
     if (token) {
-      const response = await fetch("https://sih-hackthon-n3ts.vercel.app/register-token", {
+      const response = await fetch("https://backend-production-e17f.up.railway.app/register-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token })
@@ -65,7 +65,7 @@ export const subscribeUser = async () => {
 export const triggerCustomAlert = async (disaster, message) => {
   try {
     console.log("triggerCustomAlert called", disaster, message);
-    const response = await fetch("https://sih-hackthon-n3ts.vercel.app/trigger-alert", {
+    const response = await fetch("https://backend-production-e17f.up.railway.app/trigger-alert", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ disaster, message })
