@@ -43,4 +43,4 @@ app.post('/trigger-alert', async (req, res) => {
   res.send({ status: 'Alert sent', success: response.successCount });
 });
 
-app.listen(5000, () => console.log('Backend running on port 5000'));
+app.listen(process.env.PORT, () => console.log('Backend running on port', process.env.PORT));
