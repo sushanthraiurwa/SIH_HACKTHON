@@ -9,7 +9,12 @@ admin.initializeApp({
 });
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: 'https://sih-hackthon-alpha.vercel.app', // Your Vercel frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 let tokens = [];
