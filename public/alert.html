@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMERGENCY ALERT</title>
+<style>
+  body {
+    margin: 0; padding: 0; background: red; color: #fff;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    height: 100vh; font-family: Arial Black, Arial, sans-serif;
+  }
+  .blink { animation: blink 1s infinite; font-size: 2.5rem; text-align: center; }
+  @keyframes blink { 0%,50%,100% {opacity:1;} 25%,75% {opacity:0;} }
+  .disaster-type { font-size: 2rem; margin: 12px 0; }
+  .alert-message { font-size: 1.2rem; background: #fff3e0; color: #b71c1c; padding: 18px 24px; border-radius: 12px; margin-top: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.10);}
+</style>
+</head>
+<body>
+  <div class="blink" id="disasterType"></div>
+  <div class="alert-message" id="alertMsg"></div>
+<script>
+  // Parse query params
+  const urlParams = new URLSearchParams(window.location.search);
+  const disaster = urlParams.get('disaster') || "Disaster";
+  const message = urlParams.get('message') || "Emergency alert: Please take action!";
+
+  document.getElementById('disasterType').textContent = `⚠️ ${disaster} ALERT! ⚠️`;
+  document.getElementById('alertMsg').textContent = message;
+
+  // Sound + Vibration
+  // Uncomment if you want sound -- add alert_sound.mp3 to public
+  const audio = new Audio('alert_sound.mp3');
+  audio.loop = true;
+  audio.play().catch(()=>{});
+  if (navigator.vibrate) navigator.vibrate([500,200,500,200,500]);
+</script>
+</body>
+</html>
